@@ -13,7 +13,7 @@
         native-value="completed">
         <span>Completed ({{countCompleted}})</span>
       </b-radio-button>
-      <button class="button is-danger" @click="clearTodos()">
+      <button class="button is-link" @click="clearTodos()">
         <b-icon
           icon="delete"
           size="is-small"

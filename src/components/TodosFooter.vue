@@ -8,6 +8,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import VisibilityInput from '@/components/VisibilityInput'
+
 export default {
   components: {
     VisibilityInput
