@@ -2,7 +2,7 @@
   <div>
     <div v-for="(todo, index) in filterTodo" :key="todo.title" v-if="visibility === 'all'">
       <b-field class="is-pulled-left">
-        <b-checkbox size="is-large" :value="todo.complete" @input="statusTodo(index)">
+        <b-checkbox size="is-large" v-model="todo.complete" @input="statusTodo(index)">
           <strike v-if="todo.completed">{{ todo.title }}</strike>
           <span v-else >{{ todo.title }}</span>
         </b-checkbox>
@@ -15,6 +15,7 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import Sortable from 'sortable'
 
 export default {
   computed: {
@@ -36,12 +37,20 @@ export default {
       } else return this.todos
     }
   },
+  mounted () {
+    let table = document.getElementById('sorting')
+    Sortable.create(table, { handle: '.handle', onUpdate: this.onUpdate, animation: 100})
+  },
   methods: {
     ...mapActions([
       'delTodo',
       'statusTodo',
-      'visibility'
-    ])
+      'visibility',
+      'sortTable'  
+    ]),
+    onUpdate: function (event) {
+      this.sortTable({ newIndex: event.newIndex, oldIndex: event.oldIndex})
+    }
   }
 }
 </script>
