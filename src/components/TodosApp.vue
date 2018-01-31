@@ -15,15 +15,21 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import NewTodoInput from '@/components/NewTodoInput'
 import Todos from '@/components/Todos'
 import TodosFooter from '@/components/TodosFooter'
-
 export default {
   components: {
     NewTodoInput,
     Todos,
     TodosFooter
+  },
+  methods: {
+    ...mapActions(['setTodos'])
+  },
+  created () {
+    this.setTodos(JSON.parse(localStorage.getItem('todos')))
   }
 }
 </script>

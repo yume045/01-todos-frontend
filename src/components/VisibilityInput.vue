@@ -3,21 +3,17 @@
     <b-field class="is-pulled-right">
       <b-radio-button v-model="visibility"
         native-value="all">
-        <span>All ( {{all}})</span>
+        <span>All ({{countAll}})</span>
       </b-radio-button>
       <b-radio-button v-model="visibility"
         native-value="active">
-        <span>Active ( {{active}} )</span>
+        <span>Active ({{countActive}})</span>
       </b-radio-button>
       <b-radio-button v-model="visibility"
         native-value="completed">
-        <span>Completed ( {{Completed}} )</span>
+        <span>Completed ({{countCompleted}})</span>
       </b-radio-button>
-      <b-radio-button v-model="visibility"
-        native-value="ClearCompleted" >
-        <span>Clear Completed</span>
-      </b-radio-button>
-      <button class="button is-link" @click="clearTodos()">
+      <button class="button is-danger" @click="clearTodos()">
         <b-icon
           icon="delete"
           size="is-small"
@@ -34,25 +30,7 @@ import { mapActions, mapGetters } from 'vuex'
 import { store } from '@/store'
 export default {
   computed: {
-    ...mapGetters([
-      'todos',
-      'visibility'
-    ]),
-    all () {
-      if (this.todos) {
-        return this.todos.length
-      }
-    },
-    active () {
-      if (this.todos) {
-        return this.todos.filter(todo => todo.completed === false).length
-      }
-    },
-    Completed () {
-      if (this.todos) {
-        return this.todos.filter(todo => todo.completed === true).length
-      }
-    },
+    ...mapGetters(['todos']),
     visibility: {
       get: function () {
         return store.state.visibility
